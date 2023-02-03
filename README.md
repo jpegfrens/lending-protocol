@@ -1,13 +1,12 @@
-# Sample Hardhat Project
+# Sonne Finance Fork 
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+Notes (e.g. from compound docs):
+- Unitroller & Comptroller Implementation: The Comptroller is implemented as an upgradeable proxy. The Unitroller proxies all logic to the Comptroller implementation, but storage values are set on the Unitroller. To call Comptroller functions, use the Comptroller ABI on the Unitroller address. (https://docs.compound.finance/v2/comptroller/#architecture)
+- Price Oracle
+- Interest Rate Model
 
-Try running some of the following tasks:
+- FORK token (Token of the protocol)
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
-```
+
+# Links 
+https://docs.compound.finance/v2/ctokens/
