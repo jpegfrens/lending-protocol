@@ -14,7 +14,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        version: "0.4.18",
+        version: "0.4.18", // for the WETH9 contract
         settings: {
           optimizer: {
             enabled: true,
