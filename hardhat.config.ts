@@ -24,6 +24,14 @@ const config: HardhatUserConfig = {
       },
     ],
   },
+  networks: {
+    "bsc-testnet": {
+      url: "https://rpc.ankr.com/bsc_testnet_chapel",
+      ...(process.env.PK_BSC_TESTNET_DEPLOYMENT && {
+        accounts: [process.env.PK_BSC_TESTNET_DEPLOYMENT],
+      }),
+    },
+  },
 };
 
 export default config;
