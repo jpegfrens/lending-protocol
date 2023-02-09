@@ -2,6 +2,8 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
     "hardhat": "^2.12.6",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.1",
     "prettier": "2.8.4"
   },
   "name": "finance-contracts",
@@ -220,7 +222,11 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "repository": {
     "type": "git",
