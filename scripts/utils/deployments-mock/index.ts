@@ -1,3 +1,4 @@
 import { deployMockTokens } from "./deployMockTokens";
+import { deployMockChainlinkPriceFeed } from "./deployChainlinkPriceFeed";
 
-export { deployMockTokens };
+export { deployMockTokens, deployMockChainlinkPriceFeed };

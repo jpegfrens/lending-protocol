@@ -1,35 +1,30 @@
 import { ethers } from "hardhat";
+import { ERC20 } from "../../../typechain-types";
 
-export const deployMockTokens = async () => {
-    // we deploy mock tokens for testing on BSC Testnet
-    // - BUSD: 6 Decimals
-    // - CAKE: 18 Decimals
-    // - MATIC: 18 Decimals
-    // - USDC: 6 Decimals
-    // - AAVE: 18 Decimals
-    // - DAI: 18 Decimals
-  
+export type MockTokenConfig = {
+    name: string;
+    symbol: string;
+    decimals: number;
+    cTokenSymbol: string;
+    collateralFactor: string; 
+}[];
+
+
+export const deployMockTokens = async (
+    mockTokensSpec: MockTokenConfig
+) => {
     const MockToken = await ethers.getContractFactory("MOCK20");
+    const deployedMockTokens: ERC20[] = [];
+    for (const {name, symbol, decimals} of mockTokensSpec) {
+        const t = await MockToken.deploy(
+            name,
+            symbol,
+            decimals
+        );
+        await t.deployed();
+        deployedMockTokens.push(t);
+        console.log(`${symbol} deployed to:`, t.address);
+    }
   
-    const busd = await MockToken.deploy("BUSD", "BUSD", 6);
-    await busd.deployed();
-    const cake = await MockToken.deploy("CAKE", "CAKE", 18);
-    await cake.deployed();
-    const matic = await MockToken.deploy("MATIC", "MATIC", 18);
-    await matic.deployed();
-    const usdc = await MockToken.deploy("USDC", "USDC", 6);
-    await usdc.deployed();
-    const aave = await MockToken.deploy("AAVE", "AAVE", 18);
-    await aave.deployed();
-    const dai = await MockToken.deploy("DAI", "DAI", 18);
-    await dai.deployed();
-  
-    console.log("BUSD deployed to:", busd.address);
-    console.log("CAKE deployed to:", cake.address);
-    console.log("MATIC deployed to:", matic.address);
-    console.log("USDC deployed to:", usdc.address);
-    console.log("AAVE deployed to:", aave.address);
-    console.log("DAI deployed to:", dai.address);
-  
-    return [busd, cake, matic, usdc, aave, dai];
+    return deployedMockTokens;
   };
