@@ -1,10 +1,10 @@
 import { ethers } from "hardhat";
-import { Comptroller, InterestRateModel, MOCK20 } from "../../../typechain-types";
+import { Comptroller, ERC20, InterestRateModel, MOCK20 } from "../../../typechain-types";
 
 
 export const deployCErc20Immutables = async (
-    token: MOCK20[],
-    comptroller: Comptroller,
+    token: ERC20[],
+    comptroller: Comptroller, // this is actually the unitroller address which proxies to the comptroller
     _interestRateModel: InterestRateModel,
     targetAdmin: string,
     marketTokenPrefix: string
