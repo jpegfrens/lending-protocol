@@ -1,16 +1,16 @@
 # Sonne Finance Fork - WIP 
 
-# What can I do with that ? 
+## What can I do with this codebase ? 
 - Just run `npx hardhat node` to start a local Hardhat Network. 
 - Then (in another terminal) run npx `hardhat run scripts/deploy/local.ts --network localhost`. This will make a full deploy and setup some test users that get a few mock ERC20 token minted, supply that to the protocol, enter markets with their supplied tokens as collateral and borrow against it. 
 
 
-# WIP Notes
+## WIP Notes
 Suppling ETH/ERC20: 
 - When supplying Ether to the Compound protocol, an application can send ETH directly to the payable mint function in the cEther contract. Following that mint, cEther is minted for the wallet or contract that invoked the mint function. Remember that if you are calling this function from another smart contract, that contract needs a payable function in order to receive ETH when you redeem the cTokens later. (https://medium.com/compound-finance/supplying-assets-to-the-compound-protocol-ec2cf5df5aa)
 - The operation is slightly different for cERC20 tokens. In order to mint cERC20 tokens, the invoking wallet or contract needs to first call the approve function on the underlying token’s contract. All ERC20 token contracts have an approve function.
 
-# Scripts structure 
+## Scripts structure 
 - we have utils for 
     - mock token deployment 
     - protocol contract deployments
@@ -26,7 +26,7 @@ Suppling ETH/ERC20:
     - production deployments with 
         - protocol contract deployments
 
-# BNB Testnet: 
+## BNB Testnet: 
 - Chainlink PriceFeeds: 
     - BNB/USD: 0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526
     - BUSD/USD: 0x9331b55D9830EF609A2aBCfAc0FBCE050A52fdEa
@@ -44,10 +44,10 @@ Suppling ETH/ERC20:
     - AAVE: 18 Decimals  
     - DAI: 18 Decimals 
 
-# Comments to the Interest Rate Model
+## Comments to the Interest Rate Model
 - like Sonne we pretend that a block takes 1 second. That especially makes sense on L2s. 
 - therefore instead of blocks the timestamp is used in CToken 
 
-# Links 
+## Links 
 https://docs.compound.finance/v2/ctokens/
 https://docs.sonne.finance/
