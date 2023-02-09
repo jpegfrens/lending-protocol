@@ -1,14 +1,14 @@
-# Sonne Finance Fork 
+# Sonne Finance Fork - WIP 
 
-# Notes
+# What can I do with that ? 
+- Just run `npx hardhat node` to start a local Hardhat Network. 
+- Then (in another terminal) run npx `hardhat run scripts/deploy/local.ts --network localhost`. This will make a full deploy and setup some test users that get a few mock ERC20 token minted, supply that to the protocol, enter markets with their supplied tokens as collateral and borrow against it. 
+
+
+# WIP Notes
 Suppling ETH/ERC20: 
 - When supplying Ether to the Compound protocol, an application can send ETH directly to the payable mint function in the cEther contract. Following that mint, cEther is minted for the wallet or contract that invoked the mint function. Remember that if you are calling this function from another smart contract, that contract needs a payable function in order to receive ETH when you redeem the cTokens later. (https://medium.com/compound-finance/supplying-assets-to-the-compound-protocol-ec2cf5df5aa)
 - The operation is slightly different for cERC20 tokens. In order to mint cERC20 tokens, the invoking wallet or contract needs to first call the approve function on the underlying token’s contract. All ERC20 token contracts have an approve function.
-
-# What do i want to do after deployment 
-- mint some mock token to a list of addresses 
-- supply a share of all token to the protocol 
-- lend some token from the protocol 
 
 # Scripts structure 
 - we have utils for 
@@ -50,3 +50,4 @@ Suppling ETH/ERC20:
 
 # Links 
 https://docs.compound.finance/v2/ctokens/
+https://docs.sonne.finance/
