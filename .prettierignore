@@ -1,0 +1,6 @@
+# Ignore artifacts:
+build
+coverage
+cache
+typechain-types
+artifacts

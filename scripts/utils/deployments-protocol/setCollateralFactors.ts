@@ -12,11 +12,9 @@ export const setCollateralFactors = async (
   const initializedUnitroller = comptroller.attach(unitroller.address);
 
   for (let i = 0; i < cErc20s.length; i++) {
-    
-    await initializedUnitroller._setCollateralFactor(
-      cErc20s[i].address,
-      tokenConfig[i].collateralFactor
-    ).then(async tx => await tx.wait());
+    await initializedUnitroller
+      ._setCollateralFactor(cErc20s[i].address, tokenConfig[i].collateralFactor)
+      .then(async (tx) => await tx.wait());
     console.log(
       `Set collateral factor for ${cErc20s[i].address} to ${tokenConfig[i].collateralFactor}`
     );
