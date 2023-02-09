@@ -1,6 +1,6 @@
 import type { BigNumber } from "@ethersproject/bignumber";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { MOCK20 } from "../../../typechain-types";
+import { ERC20, MOCK20 } from "../../../typechain-types";
 
 export const mintTokens = async (
   tokens: MOCK20[],

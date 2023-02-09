@@ -9,7 +9,9 @@ export const borrowTokens = async (
 ) => {
   for (let i = 0; i < cErc20s.length; i++) {
     await cErc20s[i].connect(user).borrow(amount);
-    console.log(`Borrowed ${amount} ${await cErc20s[i].symbol()} for ${user.address}`);
+    console.log(
+      `Borrowed ${amount} ${await cErc20s[i].symbol()} for ${user.address}`
+    );
   }
 };
 
