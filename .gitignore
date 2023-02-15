@@ -11,3 +11,5 @@ cache
 artifacts
 
 .DS_Store
+
+args.js

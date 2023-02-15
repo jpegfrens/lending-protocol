@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "@nomiclabs/hardhat-etherscan": "^3.1.6",
     "hardhat": "^2.12.6",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.1",
