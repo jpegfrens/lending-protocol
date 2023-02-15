@@ -3,7 +3,6 @@ import {
   Comptroller,
   ERC20,
   InterestRateModel,
-  MOCK20,
 } from "../../../typechain-types";
 
 export const deployCErc20Immutables = async (

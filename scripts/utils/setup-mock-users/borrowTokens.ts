@@ -1,4 +1,4 @@
-import { CErc20, MOCK20 } from "../../../typechain-types";
+import { CErc20 } from "../../../typechain-types";
 import type { BigNumber } from "@ethersproject/bignumber";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { makeTxWithRetry } from "../base/makeTxWithRetry";

@@ -1,9 +1,6 @@
-import hre, { ethers } from "hardhat";
-import { Comptroller, contracts, MOCK20 } from "../../typechain-types";
-import {
-  deployMockChainlinkPriceFeed,
-  deployMockTokens,
-} from "../utils/deployments-mock";
+import { ethers } from "hardhat";
+import { Comptroller, MOCK20 } from "../../typechain-types";
+import { deployMockTokens } from "../utils/deployments-mock";
 import { MockTokenConfig } from "../utils/deployments-mock/deployMockTokens";
 import {
   configureUnitrollerAndComptroller,

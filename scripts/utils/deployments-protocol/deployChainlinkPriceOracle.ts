@@ -1,5 +1,5 @@
 import { ethers } from "hardhat";
-import { ERC20, MOCK20, PriceOracle } from "../../../typechain-types";
+import { ERC20, PriceOracle } from "../../../typechain-types";
 
 export type PriceFeedConfig = { [key: string]: string };
 
