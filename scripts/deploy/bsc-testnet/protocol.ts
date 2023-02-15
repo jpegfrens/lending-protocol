@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
-import { Comptroller, MOCK20 } from "../../typechain-types";
-import { deployMockTokens } from "../utils/deployments-mock";
-import { MockTokenConfig } from "../utils/deployments-mock/deployMockTokens";
+import { Comptroller, MOCK20 } from "../../../typechain-types";
+import { deployMockTokens } from "../../utils/deployments-mock";
+import { MockTokenConfig } from "../../utils/deployments-mock/deployMockTokens";
 import {
   configureUnitrollerAndComptroller,
   deployCErc20Immutables,
@@ -10,14 +10,15 @@ import {
   deployInterestRateModel,
   deployUnitroller,
   PriceFeedConfig,
-} from "../utils/deployments-protocol";
-import { addMarketsToUnitroller } from "../utils/deployments-protocol/addMarketsToUnitroller";
-import { setCollateralFactors } from "../utils/deployments-protocol/setCollateralFactors";
-import { mintTokensForMultipleUsers } from "../utils/setup-mock-users";
-import { borrowTokensForMultipleUsers } from "../utils/setup-mock-users/borrowTokens";
-import { enterMarketsForMultipleUsers } from "../utils/setup-mock-users/enterMarkets";
-import { fundWalletsWithNativeIfBelowThreshold } from "../utils/setup-mock-users/fundWalletsWithNative";
-import { supplyTokensForMultipleUsers } from "../utils/setup-mock-users/supplyTokens";
+} from "../../utils/deployments-protocol";
+import { addMarketsToUnitroller } from "../../utils/deployments-protocol/addMarketsToUnitroller";
+import { setCompSpeeds } from "../../utils/deployments-protocol/set-comp-speeds";
+import { setCollateralFactors } from "../../utils/deployments-protocol/setCollateralFactors";
+import { mintTokensForMultipleUsers } from "../../utils/setup-mock-users";
+import { borrowTokensForMultipleUsers } from "../../utils/setup-mock-users/borrowTokens";
+import { enterMarketsForMultipleUsers } from "../../utils/setup-mock-users/enterMarkets";
+import { fundWalletsWithNativeIfBelowThreshold } from "../../utils/setup-mock-users/fundWalletsWithNative";
+import { supplyTokensForMultipleUsers } from "../../utils/setup-mock-users/supplyTokens";
 
 /**
  * CONFIGURATION
@@ -118,6 +119,7 @@ async function main() {
     cErc20Immutables,
     mockTokenConfig
   );
+  await setCompSpeeds(cErc20Immutables, unitroller, comptroller);
 
   // setting up a few users
   const [, user1, user2, user3, user4, user5, user6] =
