@@ -11,10 +11,12 @@ export const configureUnitrollerAndComptroller = async (
   unitrollerConfig: unitrollerConfig
 ) => {
   // set comptroller as pending implementation
-  await unitroller._setPendingImplementation(comptroller.address);
+  await unitroller
+    ._setPendingImplementation(comptroller.address)
+    .then((tx) => tx.wait());
 
   // accept
-  await comptroller._become(unitroller.address);
+  await comptroller._become(unitroller.address).then((tx) => tx.wait());
 
   // check if unitroller is configured correctly
   if ((await unitroller.comptrollerImplementation()) != comptroller.address) {

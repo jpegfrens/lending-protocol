@@ -1,6 +1,7 @@
 import { CErc20, ERC20, MOCK20 } from "../../../typechain-types";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import type { BigNumber } from "@ethersproject/bignumber";
+import { makeTxWithRetry } from "../base/makeTxWithRetry";
 
 export const supplyTokens = async (
   tokens: ERC20[],
@@ -9,8 +10,10 @@ export const supplyTokens = async (
   amount: BigNumber
 ) => {
   for (let i = 0; i < tokens.length; i++) {
-    await tokens[i].connect(user).approve(cErc20s[i].address, amount);
-    await cErc20s[i].connect(user).mint(amount);
+    await makeTxWithRetry(
+      tokens[i].connect(user).approve(cErc20s[i].address, amount)
+    );
+    await makeTxWithRetry(cErc20s[i].connect(user).mint(amount));
     console.log(
       `Supplied ${amount} ${await tokens[i].symbol()} for ${user.address}`
     );

@@ -19,6 +19,7 @@ import { setCollateralFactors } from "../utils/deployments-protocol/setCollatera
 import { mintTokensForMultipleUsers } from "../utils/setup-mock-users";
 import { borrowTokensForMultipleUsers } from "../utils/setup-mock-users/borrowTokens";
 import { enterMarketsForMultipleUsers } from "../utils/setup-mock-users/enterMarkets";
+import { fundWalletsWithNativeIfBelowThreshold } from "../utils/setup-mock-users/fundWalletsWithNative";
 import { supplyTokensForMultipleUsers } from "../utils/setup-mock-users/supplyTokens";
 
 /**
@@ -87,6 +88,7 @@ const mockTokenConfig: MockTokenConfig = [
 
 async function main() {
   const [deployer] = await ethers.getSigners();
+  console.log("Deploying contracts with the account:", deployer.address);
 
   // mock
   const deployedMockTokens = await deployMockTokens(mockTokenConfig);
@@ -121,8 +123,18 @@ async function main() {
   );
 
   // setting up a few users
-  const [, user1, user2, user3] = await ethers.getSigners();
-  const users = [user1, user2, user3];
+  const [, user1, user2, user3, user4, user5, user6] =
+    await ethers.getSigners();
+  const users = [user1, user2, user3, user4, user5, user6];
+
+  // sending testnet BNB to each of the users from the deployer if they don't have enough testnet BNB
+  await fundWalletsWithNativeIfBelowThreshold(
+    users,
+    ethers.utils.parseEther("0.1"),
+    ethers.utils.parseEther("0.2"),
+    deployer
+  );
+
   await mintTokensForMultipleUsers(
     deployedMockTokens as MOCK20[],
     users,
@@ -134,6 +146,15 @@ async function main() {
     users,
     ethers.utils.parseEther("1000")
   );
+
+  // sending testnet BNB to each of the users from the deployer if they don't have enough testnet BNB
+  await fundWalletsWithNativeIfBelowThreshold(
+    users,
+    ethers.utils.parseEther("0.1"),
+    ethers.utils.parseEther("0.2"),
+    deployer
+  );
+
   await enterMarketsForMultipleUsers(
     cErc20Immutables,
     users,

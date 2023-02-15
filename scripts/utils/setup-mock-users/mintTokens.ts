@@ -1,6 +1,7 @@
 import type { BigNumber } from "@ethersproject/bignumber";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { ERC20, MOCK20 } from "../../../typechain-types";
+import { MOCK20 } from "../../../typechain-types";
+import { makeTxWithRetry } from "../base/makeTxWithRetry";
 
 export const mintTokens = async (
   tokens: MOCK20[],
@@ -8,7 +9,7 @@ export const mintTokens = async (
   amount: BigNumber
 ) => {
   for (const token of tokens) {
-    await token.mint(user.address, amount);
+    await makeTxWithRetry(token.mint(user.address, amount));
     console.log(`Minted ${amount} ${await token.symbol()} for ${user.address}`);
   }
 };

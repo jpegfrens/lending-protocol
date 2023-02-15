@@ -1,4 +1,5 @@
 import { CErc20, Comptroller, Unitroller } from "../../../typechain-types";
+import { makeTxWithRetry } from "../base/makeTxWithRetry";
 import { MockTokenConfig } from "../deployments-mock/deployMockTokens";
 
 export const setCollateralFactors = async (
@@ -12,9 +13,12 @@ export const setCollateralFactors = async (
   const initializedUnitroller = comptroller.attach(unitroller.address);
 
   for (let i = 0; i < cErc20s.length; i++) {
-    await initializedUnitroller
-      ._setCollateralFactor(cErc20s[i].address, tokenConfig[i].collateralFactor)
-      .then(async (tx) => await tx.wait());
+    await makeTxWithRetry(
+      initializedUnitroller._setCollateralFactor(
+        cErc20s[i].address,
+        tokenConfig[i].collateralFactor
+      )
+    );
     console.log(
       `Set collateral factor for ${cErc20s[i].address} to ${tokenConfig[i].collateralFactor}`
     );

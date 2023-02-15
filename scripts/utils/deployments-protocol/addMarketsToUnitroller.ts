@@ -1,4 +1,5 @@
 import { CErc20, Comptroller, Unitroller } from "../../../typechain-types";
+import { makeTxWithRetry } from "../base/makeTxWithRetry";
 
 export const addMarketsToUnitroller = async (
   comptroller: Comptroller,
@@ -10,7 +11,9 @@ export const addMarketsToUnitroller = async (
   const initializedUnitroller = comptroller.attach(unitroller.address);
 
   for (let i = 0; i < markets.length; i++) {
-    await initializedUnitroller._supportMarket(markets[i].address);
+    await makeTxWithRetry(
+      initializedUnitroller._supportMarket(markets[i].address)
+    );
     console.log(`Added ${markets[i].address} to comptroller`);
   }
 };

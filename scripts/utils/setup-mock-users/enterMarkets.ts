@@ -1,5 +1,6 @@
 import { CErc20, Comptroller, Unitroller } from "../../../typechain-types";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { makeTxWithRetry } from "../base/makeTxWithRetry";
 
 export const enterMarkets = async (
   cErc20s: CErc20[],
@@ -13,7 +14,9 @@ export const enterMarkets = async (
 
   const cErc20Addresses = cErc20s.map((el) => el.address);
 
-  await initializedUnitroller.connect(user).enterMarkets(cErc20Addresses);
+  await makeTxWithRetry(
+    initializedUnitroller.connect(user).enterMarkets(cErc20Addresses)
+  );
   console.log(`Entered ${cErc20Addresses.length} markets for ${user.address}`);
 };
 
