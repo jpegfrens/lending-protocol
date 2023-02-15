@@ -42,12 +42,17 @@ Suppling ETH/ERC20:
   - DAI/USD: 0xE4eE17114774713d2De0eC0f035d4F7665fc025D
 
 - We deploy mock tockens and soTokens for
+
   - BUSD: 6 Decimals
   - CAKE: 18 Decimals
   - MATIC: 18 Decimals
   - USDC: 6 Decimals
   - AAVE: 18 Decimals
   - DAI: 18 Decimals
+
+- For deployment testing:
+  - Fork BSC testnet with `npx hardhat node --fork https://rpc.ankr.com/bsc_testnet_chapel`
+  - Run BSC testnet deployment against the local fork `npx hardhat run scripts/deploy/bsc-testnet.ts --network localhost`
 
 ## Comments to the Interest Rate Model
 
