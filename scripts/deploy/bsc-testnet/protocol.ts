@@ -1,7 +1,10 @@
 import { ethers } from "hardhat";
 import { Comptroller, MOCK20 } from "../../../typechain-types";
 import { deployMockTokens } from "../../utils/deployments-mock";
-import { MockTokenConfig } from "../../utils/deployments-mock/deployMockTokens";
+import {
+  deployedMockToken,
+  MockTokenConfig,
+} from "../../utils/deployments-mock/deployMockTokens";
 import {
   configureUnitrollerAndComptroller,
   deployCErc20Immutables,
@@ -89,7 +92,8 @@ async function main() {
   console.log("Deploying contracts with the account:", deployer.address);
 
   // mock
-  const deployedMockTokens = await deployMockTokens(mockTokenConfig);
+  const { deployedMockTokens, deployedMockTokenConfig } =
+    await deployMockTokens(mockTokenConfig);
 
   // protocol
   const comptroller = await deployComptroller();

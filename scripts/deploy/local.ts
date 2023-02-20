@@ -79,7 +79,7 @@ async function main() {
   const [deployer] = await ethers.getSigners();
 
   // mock
-  const deployedMockTokens = await deployMockTokens(mockTokenConfig);
+  const { deployedMockTokens } = await deployMockTokens(mockTokenConfig);
   const priceFeedConfig = await deployMockChainlinkPriceFeed(
     mockTokenConfig,
     [1, 2, 3, 4, 5, 6], // for now we set random prices
