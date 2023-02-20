@@ -1,5 +1,4 @@
 import { ethers } from "hardhat";
-import { ERC20 } from "../../../typechain-types";
 import { type PriceFeedConfig } from "../deployments-protocol";
 import { MockTokenConfig } from "./deployMockTokens";
 

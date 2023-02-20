@@ -21,7 +21,13 @@ export const deployChainlinkPriceOracle = async (
 
     if (!priceFeed) throw new Error(`Price feed for ${symbol} not found`);
 
-    const baseUnit = await token[i].decimals();
+    const decimals = await token[i].decimals();
+
+    if (![6, 18].includes(Number(decimals)))
+      throw new Error(`Invalid decimals for ${symbol}`);
+
+    const baseUnit = await ethers.utils.parseUnits("1", decimals);
+
     baseUnits.push(baseUnit);
   }
 
